@@ -1,0 +1,22 @@
+{
+  "name": "playwright-learning",
+  "version": "1.0.0",
+  "description": "This repository contains code and resources for learning and writing tests using Playwright.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdleJS/playwright-learning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdleJS/playwright-learning/issues"
+  },
+  "homepage": "https://github.com/AdleJS/playwright-learning#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.1"
+  }
+}
