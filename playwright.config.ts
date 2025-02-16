@@ -33,6 +33,7 @@ export default defineConfig({
     trace: 'on',
     screenshot: 'only-on-failure',
     testIdAttribute: 'data-tab-item',
+    video: 'on',
   },
 
   /* Configure projects for major browsers */
