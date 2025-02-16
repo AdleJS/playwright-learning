@@ -17,6 +17,7 @@
   "homepage": "https://github.com/AdleJS/playwright-learning#readme",
   "devDependencies": {
     "@playwright/test": "^1.50.1",
-    "@types/node": "^22.13.1"
+    "@types/node": "^22.13.1",
+    "allure-playwright": "^3.1.0"
   }
 }
