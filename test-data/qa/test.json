@@ -1,0 +1,12 @@
+{
+    "TestDataSetFirst": {
+        "BannerText": "ПОДПИСЫВАЙТЕСЬ НА КАНАЛ TENGRI LIVE",
+        "NewsLink": "NEWS",
+        "AdvLink": "Реклама"
+    },
+    "TestDataSetSecond": {
+        "BannerText": "Javascript by Testers Talk",
+        "NewsLink": "API Testing by Testers Talk",
+        "AdvLink": "Cypress by Testers Talk"
+    }
+}
