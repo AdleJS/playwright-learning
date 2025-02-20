@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { getPostAPIRequestBody } from '../../src/utils/ApiHelper';
+import tokenApiRequest from '../../test-data/api/TOKEN_REQUEST.json';
+import putApiRequest from '../../test-data/api/PUT_REQUEST.json';
 
 test.use({ baseURL: process.env.BASE_API_URL! });
 
-test('Dynamic Post Request Type Safe', async ({ request }) => {
+test('Put Request', async ({ request }) => {
     const firstname = 'Adilet';
     const lastname = 'Askar';
     const totalPrice = 1000;
@@ -11,7 +13,6 @@ test('Dynamic Post Request Type Safe', async ({ request }) => {
     const postApiRequest = await getPostAPIRequestBody(firstname, lastname, totalPrice, true, 'breakfast', '2025-03-13', '2025-03-15');
     const postApiResponse = await request.post(`/booking`, { data: postApiRequest });
     const jsonPostApiResponse = await postApiResponse.json();
-    console.log(jsonPostApiResponse);
 
     expect(postApiResponse.status()).toBe(200);
     expect(postApiResponse.statusText()).toBe('OK');
@@ -25,4 +26,32 @@ test('Dynamic Post Request Type Safe', async ({ request }) => {
     expect(jsonPostApiResponse['bookingid']).toBeGreaterThan(0);
     expect(jsonPostApiResponse['booking']['firstname']).toBe('Adilet');
     expect(jsonPostApiResponse['booking']['lastname']).toBe('Askar');
+
+    const bookingId = jsonPostApiResponse.bookingid;
+
+    const getApiResponse = await request.get(`/booking/${bookingId}`);
+
+    expect(getApiResponse.status()).toBe(200);
+    expect(getApiResponse.statusText()).toBe('OK');
+
+    const tokenApiResponse = await request.post(`/auth`, { data: tokenApiRequest });
+
+    expect(tokenApiResponse.status()).toBe(200);
+    expect(tokenApiResponse.statusText()).toBe('OK');
+
+    const tokenApiResponseJSON = await tokenApiResponse.json();
+    const token = tokenApiResponseJSON.token;
+
+    const putApiResponse = await request.put(`/booking/${bookingId}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': `token=${token}`
+        },
+        data: putApiRequest
+    })
+
+    expect(putApiResponse.status()).toBe(200)
+    expect(putApiResponse.statusText()).toBe('OK');
+
+
 });
